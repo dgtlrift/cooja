@@ -190,6 +190,16 @@ tasks.withType(AbstractArchiveTask).configureEach {
   reproducibleFileOrder = true
 }
 
+tasks.withType(Javadoc).configureEach {
+    if (project.hasProperty('javadocExtraArgs')) {
+        options.jFlags project.getProperty('javadocExtraArgs').split()
+    }
+    CoreJavadocOptions opt = options as CoreJavadocOptions
+    opt.addStringOption("source", "21")
+    opt.addBooleanOption("-enable-preview", true)
+}
+
+
 tasks.register('copyDependencies', Copy) {
   def dir = layout.buildDirectory.dir("libs/lib")
   description = "Copy jar dependencies into ${dir.get()}"
