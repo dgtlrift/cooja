@@ -1,5 +1,6 @@
 .gradle
 .gradle_home
+.DS_Store
 *~
 build
 /dist
